@@ -12,7 +12,7 @@ from app.models.auth_model import User, UserRole
 from app.models.sales_model import SalesEntry
 from app.schemas.sales_schema import SalesEntryCreate, SalesEntryResponse
 from app.services.sales_service import SalesService
-
+from app.services.invoice_service import InvoiceService
 router = APIRouter()
 
 # RBAC: ADMIN and OPERATOR manage Sales / Invoices
