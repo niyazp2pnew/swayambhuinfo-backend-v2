@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     ENVIRONMENT: str = "production"
 
-    SECRET_KEY: str = "temporary_dev_secret_key_replace_in_production_min_64_chars"
+    SECRET_KEY: str = "096722edfabe6ca46e79f5322a6b31854417a6a2068c7d5a0f61094b80e4b395"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
 
     # Raw connection URL from environment (.env)
