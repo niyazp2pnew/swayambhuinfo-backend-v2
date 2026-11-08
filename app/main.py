@@ -34,7 +34,7 @@ origins = [
     "http://127.0.0.1:3001",
     "https://swayambhuinfo.com",
     "https://www.swayambhuinfo.com",
-    "https://panel.swayambhuinfo.com",,
+    "https://panel.swayambhuinfo.com",
 ]
 
 # CORS Middleware with regex coverage for dynamic Vercel preview environments
