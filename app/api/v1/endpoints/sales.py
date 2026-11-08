@@ -58,15 +58,29 @@ async def download_invoice_pdf(
     sales_id: uuid.UUID,
     db: Annotated[AsyncSession, Depends(get_db)],
 ):
-    """Download official Sales Receipt PDF."""
+    """Download official Sales Receipt PDF with in-memory fallback for ephemeral cloud hosting."""
     entry = await db.get(SalesEntry, sales_id)
-    if not entry or not entry.pdf_file_path or not os.path.exists(entry.pdf_file_path):
+    if not entry:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Invoice PDF file not found.",
+            detail=f"Sales entry '{sales_id}' not found.",
         )
-    return FileResponse(
-        entry.pdf_file_path,
+
+    # 1. Serve from disk if file is still cached locally
+    if entry.pdf_file_path and os.path.exists(entry.pdf_file_path):
+        return FileResponse(
+            entry.pdf_file_path,
+            media_type="application/pdf",
+            filename=f"{entry.bill_number}.pdf",
+        )
+
+    # 2. Resilient Fallback: Generate the ReportLab PDF in-memory from database values
+    pdf_bytes = InvoiceService.generate_sales_receipt_pdf(entry)
+    
+    return Response(
+        content=pdf_bytes,
         media_type="application/pdf",
-        filename=f"{entry.bill_number}.pdf",
+        headers={
+            "Content-Disposition": f"attachment; filename={entry.bill_number}.pdf"
+        },
     )
