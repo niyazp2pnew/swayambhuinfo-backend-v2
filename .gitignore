@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# C-extensions
+*.pyd
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment Secrets & Local Configs
+.env
+.env*.local
+.env.production
+.env.staging
+
+# Alembic compiled artifacts
+alembic/**/__pycache__/
+alembic/versions/**/__pycache__/
+
+# Local SQLite / Temp databases
+*.db
+*.sqlite3
+
+# Document Storage & Uploads (Keeps directories local)
+storage/invoices/*
+!storage/invoices/.gitkeep
+storage/csv/*
+!storage/csv/.gitkeep
+
+# Operating System & IDE Artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
